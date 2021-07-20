@@ -15,6 +15,27 @@ Install Go and run `go get`:
 $ go get github.com/Gunyoung-Kim/GoQueue/...
 ```
 
+### Testing 
+
+```sh
+$ go test ./...
+```
+
+### Performance
+
+```sh 
+$ go test ./... -bench=.
+goos: darwin
+goarch: amd64
+pkg: github.com/Gunyoung-Kim/queue/queue/queue
+cpu: Intel(R) Core(TM) i5-8279U CPU @ 2.40GHz
+BenchmarkAdd-8             55870             20906 ns/op
+BenchmarkAddByList-8       23574             51621 ns/op
+PASS
+ok      github.com/Gunyoung-Kim/queue/queue/queue       3.453s
+```
+Compare with container/list in Go standard library
+
 ### Create Queue 
 
 
