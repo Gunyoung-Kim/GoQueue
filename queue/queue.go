@@ -52,6 +52,7 @@ func (q *Queue) Poll() interface{} {
 	}
 
 	target := q.contents[q.start]
+	q.contents[q.start] = nil
 	q.start++
 	q.length--
 	q.reduceSize()
