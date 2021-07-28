@@ -102,10 +102,42 @@ func TestRemove(t *testing.T) {
 	verifyErrEqual(t, err, ErrNoElement)
 }
 
+func TestPeek(t *testing.T) {
+	q := NewQueue()
+	result := q.Peek()
+	if result != nil {
+		t.Errorf("Queue Peek: result-%d, expect-nil", result)
+	}
+	q.Add(1)
+	result = q.Peek()
+	if result != 1 {
+		t.Errorf("Queue Peek: result-%d, expect-%d", result, 1)
+	}
+}
+
+func TestElement(t *testing.T) {
+	q := NewQueue()
+
+	// check if queue is empty
+	_, err := q.Element()
+	verifyErrEqual(t, err, ErrNoElement)
+
+	// check if queue is not empty
+	q.Add(1)
+	result, err := q.Element()
+	verifyErrNil(t, err)
+
+	if result != 1 {
+		t.Errorf("Queue Peek: result-%d, expect-%d", result, 1)
+	}
+}
+
+var repeatTime = 2048
+
 func BenchmarkAdd(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		queue := NewQueue()
-		for n := 1; n <= 1024; n++ {
+		for n := 1; n <= repeatTime; n++ {
 			queue.Add(n)
 		}
 	}
@@ -114,7 +146,7 @@ func BenchmarkAdd(b *testing.B) {
 func BenchmarkAddByList(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		var list list.List
-		for n := 1; n <= 1024; n++ {
+		for n := 1; n <= repeatTime; n++ {
 			list.PushBack(i)
 		}
 	}
