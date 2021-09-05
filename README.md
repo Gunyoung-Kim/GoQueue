@@ -55,4 +55,4 @@ func main() {
 
 ---
 
-Kim GunYoung (Korean)
+Kim GunYoung
